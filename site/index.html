@@ -90,8 +90,17 @@
     async function translate() {
       const response = document.getElementById("response");
       const message = document.getElementById("prompt");
-      response.innerText =
-        "Please give me a minute while I consider your question and provide a thoughtful response.";
+      const loadingMessage =
+        "Please give me a minute while I consider your question and provide a thoughtful response";
+      let suffix = ".";
+      response.innerText = loadingMessage + suffix;
+      const loading = setInterval(() => {
+        if (suffix.length >= 3) {
+          suffix = "";
+        }
+        suffix += ".";
+        response.innerText = loadingMessage + suffix;
+      }, 1000);
       try {
         const res = await fetch("/translate", {
           method: "POST",
@@ -101,9 +110,10 @@
           body: message,
         });
         response.innerText = await res.text();
-      } catch(e) {
-        response.innerText = "I ran into a problem translating that"
+      } catch (e) {
+        response.innerText = "I ran into a problem translating that";
       }
+      clearInterval(loading);
     }
   </script>
 </body>
