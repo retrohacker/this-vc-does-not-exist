@@ -92,18 +92,18 @@
       const message = document.getElementById("prompt");
       response.innerText =
         "Please give me a minute while I consider your question and provide a thoughtful response.";
-      const res = await fetch("/translate", {
-        method: "POST",
-        headers: {
-          "content-type": "text/plain",
-        },
-        body: message,
-      });
-      let result = "I ran into a problem translating that.";
-      if (res.status === "200") {
-        result = await res.text();
+      try {
+        const res = await fetch("/translate", {
+          method: "POST",
+          headers: {
+            "content-type": "text/plain",
+          },
+          body: message,
+        });
+        response.innerText = await res.text();
+      } catch(e) {
+        response.innerText = "I ran into a problem translating that"
       }
-      response.innerText = result;
     }
   </script>
 </body>
