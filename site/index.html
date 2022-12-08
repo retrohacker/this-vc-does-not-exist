@@ -89,8 +89,7 @@
   <script>
     async function translate() {
       const response = document.getElementById("response");
-      const prefix = "How would you say this if you were talking to a silicon valley venture capitalist: \n\n"
-      const message = prefix + document.getElementById("prompt").value;
+      const message = document.getElementById("prompt").value;
       if (message.length < 10) {
         response.innerText = 'Please provide more details about the project and what you are trying to achieve.'
         return;
