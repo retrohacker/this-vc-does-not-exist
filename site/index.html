@@ -89,7 +89,8 @@
   <script>
     async function translate() {
       const response = document.getElementById("response");
-      const message = document.getElementById("prompt").value;
+      const prefix = "Rewrite the following message as if you were a Silicon Valley Venture Capitalist who graduated from Stanford, but do not mention any details about yourself: \n\n"
+      const message = prefix + document.getElementById("prompt").value;
       if (message.length < 10) {
         response.innerText = 'Please provide more details about the project and what you are trying to achieve.'
         return;
