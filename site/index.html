@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<head>
+  <style>
+    body {
+      height: 100vh;
+      background-color: #222831;
+      color: #eeeeee;
+      line-height: 1.5em;
+      font-family: Sans;
+    }
+    #content {
+      max-width: 600px;
+      padding: 10px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: justify;
+    }
+    h1 {
+    }
+    img {
+      width: 300px;
+    }
+    textarea {
+      width: 90%;
+      min-height: 120px;
+      font-size: 16px;
+      font-size: max(16px, 1em);
+      padding: 1em 1em;
+      background-color: #393e46;
+      color: #eeeeee;
+      border: 2px solid #393e46;
+      border-radius: 4px;
+      resize: vertical;
+      font-family: Sans;
+    }
+    textarea:focus {
+      border-color: #00adb5;
+    }
+    button {
+      display: block;
+      padding: 0.7em 1.4em;
+      margin: 1em 1em;
+      border-radius: 0.5em;
+      box-sizing: border-box;
+      text-decoration: none;
+      font-weight: 400;
+      color: #eeeeee;
+      background-color: #393e46;
+      box-shadow: inset 0 -0.6em 0 -0.35em rgba(0, 0, 0, 0, 0.17);
+      text-align: center;
+    }
+    button:hover {
+      border-color: #00adb5;
+    }
+    #response {
+      width: 90%;
+      font-size: 16px;
+      font-size: max(16px, 1em);
+      padding: 1em 1em;
+      background-color: #393e46;
+      color: #eeeeee;
+      border: 2px solid #393e46;
+      border-radius: 4px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div id="content">
+    <h1>This VC Does Not Exist</h1>
+    <img src="./headshot.png" width="300px" />
+    <p>
+      Hello! My name is Spencer Westford and I am a Silicon Valley Venture
+      Capitalist. I graduated from Stanford University with a degree in finance
+      and have been investing in technology startups for over a decade. I am
+      always on the lookout for the next big thing, and I am excited to help
+      promising founders bring their ideas to life. Please let me know what you
+      are trying to say and I will provide guidance on how to effectively
+      communicate your message in a way that resonates with investors and other
+      key stakeholders.
+    </p>
+    <textarea id="prompt"></textarea>
+    <button onclick="translate()">Translate</button>
+    <div id="response">My response will show up here</div>
+  </div>
+  <script>
+    async function translate() {
+      const response = document.getElementById("response");
+      const message = document.getElementById("prompt");
+      response.innerText =
+        "Please give me a minute while I consider your question and provide a thoughtful response.";
+      const res = await fetch("/translate", {
+        method: "POST",
+        headers: {
+          "content-type": "text/plain",
+        },
+        body: message,
+      });
+      let result = "I ran into a problem translating that.";
+      if (res.status === "200") {
+        result = await res.text();
+      }
+      response.innerText = result;
+    }
+  </script>
+</body>
