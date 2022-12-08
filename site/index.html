@@ -89,7 +89,7 @@
   <script>
     async function translate() {
       const response = document.getElementById("response");
-      const message = document.getElementById("prompt");
+      const message = document.getElementById("prompt").innerText();
       const loadingMessage =
         "Please give me a minute while I consider your question and provide a thoughtful response";
       let suffix = ".";
