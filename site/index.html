@@ -90,6 +90,10 @@
     async function translate() {
       const response = document.getElementById("response");
       const message = document.getElementById("prompt").innerText();
+      if (message.length < 10) {
+        response.innerText = 'Please provide more details about the project and what you are trying to achieve.'
+        return;
+      }
       const loadingMessage =
         "Please give me a minute while I consider your question and provide a thoughtful response";
       let suffix = ".";
