@@ -26,7 +26,7 @@ export default {
     await api.ensureAuth();
     const message = await request.text();
     const prompt =
-      "Rewrite the following statement as if it were written by a Silicon Valley venture capitalist who graduated from Stanford, do not mention that you are a Silicon Valley venture capitalist or that you graduated from Stanford: " +
+      "Rewrite the following statement as if it were written by a Silicon Valley venture capitalist who graduated from Stanford, do not mention any details about yourself: " +
       message;
     const resp = await api.sendMessage(prompt);
     return new Response(resp);
