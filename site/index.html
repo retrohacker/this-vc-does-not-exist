@@ -89,7 +89,7 @@
   <script>
     async function translate() {
       const response = document.getElementById("response");
-      const message = document.getElementById("prompt").innerText;
+      const message = document.getElementById("prompt").value;
       if (message.length < 10) {
         response.innerText = 'Please provide more details about the project and what you are trying to achieve.'
         return;
